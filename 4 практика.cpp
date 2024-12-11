@@ -7,8 +7,6 @@
 #include <Windows.h>
 #include "Resource.h"
 
-#define XSCREEN GetSystemMetrics(SM_CXSCREEN) *0.8
-#define YSCREEN GetSystemMetrics(SM_CYSCREEN) *0.6
 #define SIZE 500
 #define RANGE 3500
 //line и page лучше просто константами
@@ -44,7 +42,9 @@ int WINAPI WinMain(
     if (!hMenu) {
         return -1;
     }
-
+    int XSCREEN GetSystemMetrics(SM_CXSCREEN) *0.8;
+    int YSCREEN GetSystemMetrics(SM_CYSCREEN) *0.6;
+    
     HWND hWnd = CreateWindow(nameClass, "Главное окно", WS_OVERLAPPEDWINDOW | WS_VSCROLL | WS_HSCROLL,
         (GetSystemMetrics(SM_CXSCREEN) - (int)XSCREEN) / 2, (GetSystemMetrics(SM_CYSCREEN) - (int)YSCREEN) / 2,
         (int)XSCREEN, (int)YSCREEN, NULL, hMenu, hInstance, NULL);
@@ -77,11 +77,6 @@ int WINAPI WinMain(
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
-
-    //case WM_CREATE:
-    //{
-    // //смерть
-    //}
 
     case WM_VSCROLL:
     {
@@ -210,8 +205,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     }
 
     case WM_KEYDOWN: {
-        //можно добавить управление самый вверх и самый низ
-
         switch (wParam) {
         case VK_UP:
             PostMessage(hWnd, WM_VSCROLL, SB_LINEUP, NULL);
